@@ -31,12 +31,72 @@
 
     <section id="pres">
         <h2>Prezentacja</h2>
-        <a href="https://docs.google.com/presentation/d/1gXU5gjjtzJbZeGxEMJ8UW6baecs4sSKb/edit?usp=drive_link&ouid=115167255376620982141&rtpof=true&sd=true" download>
+        <a href="https://docs.google.com/uc?export=download&id=1gXU5gjjtzJbZeGxEMJ8UW6baecs4sSKb" download>
             <button style="background-color: #1e90ff; color: white; padding: 15px 30px; border: none; border-radius: 5px; font-size: 16px; cursor: pointer; text-align: center;">
                 Pobierz Prezentację
             </button>
         </a>
-    </section>
+
+        <button id="showPresentation" style="background: none; border: none; cursor: pointer; font-size: 24px;" title="Pokaż prezentację">
+            📽️
+        </button>
+
+        <div id="presentationModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 1000;">
+            <div style="position: relative; width: 100%; height: 100%; background: #000; overflow: hidden;">
+                <button onclick="closeModal()" 
+                        style="position: absolute; top: 10px; right: 15px; font-size: 30px; background: none; color: white; border: none; cursor: pointer;">
+                    &times;
+                </button>
+                
+                <iframe id="presentationIframe" src="https://docs.google.com/presentation/d/1H0gRAWSJKCaaBF-b00UkXaNJuuUCW4DG/embed?loop=true"
+                        frameborder="0" 
+                        width="100%" 
+                        height="100%" 
+                        allowfullscreen 
+                        mozallowfullscreen 
+                        webkitallowfullscreen>
+                </iframe>
+            </div>
+        </div>
+
+        <script>
+            document.getElementById('showPresentation').addEventListener('click', function() {
+                const modal = document.getElementById('presentationModal');
+                modal.style.display = 'block';
+                openFullscreen();
+            });
+
+            function closeModal() {
+                document.getElementById('presentationModal').style.display = 'none';
+                closeFullscreen();
+            }
+
+            function openFullscreen() {
+                const elem = document.getElementById('presentationIframe');
+                if (elem.requestFullscreen) {
+                    elem.requestFullscreen();
+                } else if (elem.mozRequestFullScreen) {
+                    elem.mozRequestFullScreen();
+                } else if (elem.webkitRequestFullscreen) {
+                    elem.webkitRequestFullscreen();
+                } else if (elem.msRequestFullscreen) {
+                    elem.msRequestFullscreen();
+                }
+            }
+
+            function closeFullscreen() {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                } else if (document.mozCancelFullScreen) {
+                    document.mozCancelFullScreen();
+                } else if (document.webkitExitFullscreen) {
+                    document.webkitExitFullscreen();
+                } else if (document.msExitFullscreen) {
+                    document.msExitFullscreen();
+                }
+            }
+        </script>
+    </section>    
 
     <section id="albums">
         <h2>Albumy</h2>
@@ -127,7 +187,7 @@
 
     <section id="news-alert" style="cursor: pointer;">
         <div class="alert" role="alert">
-            <strong>Nowa aktualność!</strong> 🚀 Nasza aplikacja może być lepsza dla was i dodać zostawiania swoich komentarzy! 🎉
+            <strong>Nowa aktualność!</strong> 🚀 Pomóż nam ulepszyć naszą aplikację — zostaw swój komentarz! 🎉
         </div>
     </section>
 
